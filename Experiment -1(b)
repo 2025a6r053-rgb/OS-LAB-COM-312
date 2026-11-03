@@ -1,0 +1,155 @@
+# Experiment 1(b): Process Management in Linux
+
+## Aim
+To study and execute basic Linux commands for creating and managing processes, viewing running processes, changing process priority, and terminating processes.
+
+## Objectives
+- To understand the concept of processes in Linux.
+- To create and manage processes.
+- To view running processes.
+- To identify Process IDs (PID) and Parent Process IDs (PPID).
+- To change process priority using nice and renice commands.
+- To terminate running processes.
+
+## 1. Creating and Managing Processes
+
+A process is a program that is currently being executed by the operating system. Every process has a unique Process ID (PID).
+
+**Commands:**
+
+```bash
+sleep 100
+```
+Runs a process for 100 seconds.
+
+```bash
+sleep 100 &
+```
+Runs a process in the background.
+
+```bash
+jobs
+```
+Displays background jobs in the current terminal.
+
+```bash
+fg
+```
+Brings a background process to the foreground.
+
+```bash
+bg
+```
+Resumes a suspended process in the background.
+
+## 2. Viewing Running Processes
+
+Linux provides different commands to view and monitor running processes.
+
+| Command | Description |
+|---|---|
+| `ps` | Displays processes running in the current terminal. |
+| `ps -ef` | Displays all running processes. |
+| `ps aux` | Displays detailed information about processes. |
+| `top` | Monitors processes in real time. |
+| `pstree` | Displays processes in tree format. |
+| `pidof` | Displays the PID of a process. |
+| `pgrep` | Searches for process IDs. |
+
+**Example:**
+
+```bash
+ps -ef
+ps aux
+top
+```
+
+## 3. Changing Process Priority
+
+Process priority determines how much CPU attention a process receives.
+
+Linux uses a Nice value ranging from -20 to +19.
+
+- -20: Highest priority
+- 0: Default priority
+- +19: Lowest priority
+
+**Commands:**
+
+```bash
+nice -n 10 sleep 100 &
+```
+Starts a process with a nice value of 10.
+
+```bash
+ps -l
+```
+Displays process priority information.
+
+```bash
+renice 5 -p PID
+```
+Changes the nice value of an existing process to 5. Replace PID with the actual process ID.
+
+## 4. Terminating Processes
+
+Processes can be terminated using their PID or process name.
+
+| Command | Description |
+|---|---|
+| `kill PID` | Terminates a process. |
+| `kill -9 PID` | Forcefully terminates a process. |
+| `pkill process_name` | Terminates processes by name. |
+| `killall process_name` | Terminates all processes with the specified name. |
+| `Ctrl + C` | Interrupts a foreground process. |
+| `Ctrl + Z` | Suspends a foreground process. |
+
+## 5. Practical Execution
+
+**Step 1: Create a background process**
+
+```bash
+sleep 300 &
+```
+
+**Step 2: View the running process**
+
+```bash
+ps aux | grep sleep
+```
+
+**Step 3: Find the Process ID**
+
+```bash
+pgrep -a sleep
+```
+
+**Step 4: Change the process priority**
+
+```bash
+renice 10 -p PID
+```
+
+**Step 5: Check the updated priority**
+
+```bash
+ps -o pid,ni,pri,cmd -p PID
+```
+
+**Step 6: Terminate the process**
+
+```bash
+kill PID
+```
+
+**Step 7: Verify process termination**
+
+```bash
+ps -p PID
+```
+
+Replace PID with the actual process ID obtained during execution.
+
+## Conclusion
+
+In this experiment, we studied and executed various Linux commands for process management. We learned how to create background processes, view running processes, identify process IDs, change process priority using nice and renice commands, and terminate processes using kill commands. This experiment helped us understand how Linux manages processes and allocates CPU resources.
